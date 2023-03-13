@@ -13,15 +13,17 @@ $(document).ready(function(){
     if(isNaN(point)){ $(this).val(''); }
   });
   // [国語の点数,英語の点数,数学の点数,理科の点数,社会の点数]の入力値を取得して合計点と平均点を出すロジックを作ります。
-  function score_indicate(){
-    // 変数「subject_points」に
-    // [国語の点数,英語の点数,数学の点数,理科の点数,社会の点数]の配列を代入します。
+  function score_indicate() {
     let subject_points = [Number($('#national_language').val()),
                           Number($('#english').val()),
                           Number($('#mathematics').val()),
                           Number($('#science').val()),
                           Number($('#society').val())
                           ];
+    return subject_points;
+  }; 
+  let new_points=score_indicate()
+  
     // 変数「sum」に
     // [国語の点数,英語の点数,数学の点数,理科の点数,社会の点数]をそれぞれ足します。
     // ヒント! 配列を一つずつ取り出して足していきます。
@@ -30,7 +32,7 @@ $(document).ready(function(){
     // sum = sum + subject_points[2];
     // sum = sum + subject_points[3];
     // sum = sum + subject_points[4];
-    let sum = subject_points.reduce(function (result, current){
+    let sum = new_points.reduce(function (result, current){
       return result + current;
     }, 0);
     // 「合計点：」(id="sum_indicate")に変数「sum」(合計点)を出力させます。
@@ -38,9 +40,9 @@ $(document).ready(function(){
     // 変数「average」に
     // 平均値を出して代入します。(平均をとりたい数の合計点数(sum) / 全体の個数)
     // ヒント! 全体の個数はlengthメソッドを使って求めます。(lengthメソッド: 文字列の長さや配列の要素数などを取得するメソッド)
-    let average = sum / subject_points.length
+    let average = sum / new_points.length
     $(`#average_indicate`).text(average);
-  };
+  
   // 平均点数を取得し、取得した平均点数からランク分け("A", "B", "C", "D")をするロジックを作ります。
   function get_achievement(){
     // 変数「averageIndicate」に
